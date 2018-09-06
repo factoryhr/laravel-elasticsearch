@@ -15,7 +15,14 @@ class CreateMovieActorsTable extends Migration
     {
         Schema::create('movie_actors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->integer('movie_id')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('movie_id')
+                  ->references('movies')
+                  ->on('id')
+                  ->onDelete('set null');
         });
     }
 
